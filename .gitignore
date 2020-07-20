@@ -1,3 +1,5 @@
+gamemodes/*.amx
+filterscripts/*.amx
 pawno
 scriptfiles/*
 server_log.txt
