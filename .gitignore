@@ -1,5 +1,5 @@
 pawno
-scriptfiles/*
+scriptfiles/LARP/*
 filterscripts/*.pwn
 gamemodes/*.pwn
 server_log.txt
