@@ -1,7 +1,7 @@
 pawno
-scriptfiles/*
-filterscripts/*.pwn
-gamemodes/*.pwn
+scriptfiles/LARP/*
+filterscripts/*.amx
+gamemodes/*.amx
 server_log.txt
 server.cfg
 samp.ban
