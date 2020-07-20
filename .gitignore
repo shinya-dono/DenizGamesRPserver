@@ -1,7 +1,5 @@
 pawno
 scriptfiles/*
-filterscripts/*.pwn
-gamemodes/*.pwn
 server_log.txt
 server.cfg
 samp.ban
