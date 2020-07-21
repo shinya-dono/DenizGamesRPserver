@@ -20597,6 +20597,7 @@ public LoadSBizz()
 //------------------------------------------------------------------------------------------------------
 public OnGameModeInit() // Do not add vehicles Above the next lines. - CuervO
 {
+	UsePlayerPedAnims();
 	LoadCar();
 	new string2[64];
 	for(new h = 1; h < sizeof(CarInfo); h++)
