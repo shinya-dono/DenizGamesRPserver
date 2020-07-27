@@ -5384,7 +5384,7 @@ dcmd_acheckcode(playerid, params[])
 dcmd_attach(playerid, params[])
 {
 
-	if(PlayerInfo[playerid][pAdmin] < 1337)
+	if(PlayerInfo[playerid][pAdmin] < 6)
 	    return 0;
 
 	new modelid,slot,bone,Float:fX,Float:fY,Float:fZ,Float:fRX,Float:fRY,Float:fRZ,Float:ScaleX,Float:ScaleY,Float:ScaleZ;
@@ -5405,7 +5405,7 @@ dcmd_attach(playerid, params[])
 
 dcmd_unattach(playerid,params[])
 {
-    if(PlayerInfo[playerid][pAdmin] < 1337)
+    if(PlayerInfo[playerid][pAdmin] < 6)
 	    return 0;
 
 	new idx;
@@ -33480,7 +33480,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 	if(strcmp(cmd, "/resetammutimer", true) == 0) // Bye CuervO_NegrO
 	{
-		if (PlayerInfo[playerid][pAdmin] < 1337)
+		if (PlayerInfo[playerid][pAdmin] < 6)
 	    {
 		    SendClientMessage(playerid, COLOR_GREY, "You are not authorized");
 		    return 1;
@@ -33518,7 +33518,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	
 	if(strcmp(cmd, "/resetofficertimer", true) == 0) // Bye CuervO_NegrO
 	{
-		if (PlayerInfo[playerid][pAdmin] < 1337)
+		if (PlayerInfo[playerid][pAdmin] < 6)
 	    {
 		    SendClientMessage(playerid, COLOR_GREY, "You are not authorized");
 		    return 1;
@@ -33556,7 +33556,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	
 	if(strcmp(cmd, "/resetpassporttimer", true) == 0) // Bye CuervO_NegrO
 	{
-		if (PlayerInfo[playerid][pAdmin] < 1337)
+		if (PlayerInfo[playerid][pAdmin] < 6)
 	    {
 		    SendClientMessage(playerid, COLOR_GREY, "You are not authorized");
 		    return 1;
@@ -33594,7 +33594,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 	if(strcmp(cmd, "/resetrobtimer", true) == 0) // Bye CuervO_NegrO
 	{
-		if (PlayerInfo[playerid][pAdmin] < 1337)
+		if (PlayerInfo[playerid][pAdmin] < 6)
 	    {
 		    SendClientMessage(playerid, COLOR_GREY, "You are not authorized");
 		    return 1;
@@ -48935,9 +48935,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
 					return 1;
 				}
 				new money = strval(tmp);
-				if(money < 1 && PlayerInfo[playerid][pAdmin] < 1337) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
+				if(money < 1 && PlayerInfo[playerid][pAdmin] < 6) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 				if(PlayerInfo[playerid][pAdmin] == 6 && money > 1250000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $1250000");
-				if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 15000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $15000000");
+				if(PlayerInfo[playerid][pAdmin] >= 6 && money > 15000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $15000000");
 				format(string, sizeof(string), "[ADMIN]: %s Has set the Lotto Jackpot to %d.",sendername, money);
 				ABroadCast(COLOR_LIGHTRED,string, 5);
 				format(string, sizeof(string), "Lottery News: Our New Jackpot is $%d.", money);
@@ -49019,7 +49019,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-	        if(PlayerInfo[playerid][pAdmin] >= 1337)
+	        if(PlayerInfo[playerid][pAdmin] >= 6)
 	        {
 				tmp = strtokx(cmdtext, idx);
 				if(!strlen(tmp))
@@ -49115,7 +49115,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-	        if(PlayerInfo[playerid][pAdmin] >= 1337)
+	        if(PlayerInfo[playerid][pAdmin] >= 6)
 	        {
 	            PayDay();
 			}
@@ -49161,7 +49161,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 					}
 					new amount;
 					amount = strval(tmp);
-					if (PlayerInfo[playerid][pAdmin] >= 1337)
+					if (PlayerInfo[playerid][pAdmin] >= 6)
 					{
 						switch (weapon)
 						{
@@ -49411,7 +49411,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 					}
 					new amount;
 					amount = strval(tmp);
-					if (PlayerInfo[playerid][pAdmin] >= 1337)
+					if (PlayerInfo[playerid][pAdmin] >= 6)
 					{
 						switch (weapon)
 						{
@@ -50717,7 +50717,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	
 	if(strcmp(cmd, "/cardebug", true) == 0)
 	{
-	    if(PlayerInfo[playerid][pAdmin] >= 1337)
+	    if(PlayerInfo[playerid][pAdmin] >= 6)
 	    {
 	        if(cDebug == 1)
 	        {
@@ -51849,7 +51849,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -51890,7 +51890,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -51931,7 +51931,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -51973,7 +51973,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -52052,7 +52052,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -52147,7 +52147,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -52183,7 +52183,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -52219,7 +52219,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if (GetPlayerState(playerid) == 2)
 				{
@@ -52974,7 +52974,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			ammo = strval(tmp);
 			if(ammo <1||ammo > 49999)
 			{ SendClientMessage(playerid, COLOR_GRAD1, "** Dont go below 1 or above 49999 bullets!"); return 1; }
-			if (PlayerInfo[playerid][pAdmin] >= 1337 || IsPlayerAdmin(playerid))
+			if (PlayerInfo[playerid][pAdmin] >= 6 || IsPlayerAdmin(playerid))
 			{
 			    if(IsPlayerConnected(playa))
 			    {
@@ -53951,7 +53951,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	{
 	    if(IsPlayerConnected(playerid))
 	    {
-	        if(PlayerInfo[playerid][pAdmin] < 1337)
+	        if(PlayerInfo[playerid][pAdmin] < 6)
 			{
 			    SendClientMessage(playerid, COLOR_GRAD1, "** you are not authorized to use that command!");
 			    return 1;
@@ -54915,7 +54915,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 				if(PlayerInfo[playerid][pAdmin] == 5 && money > 10000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $10000");
 				if(PlayerInfo[playerid][pAdmin] == 6 && money > 50000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $50000");
-				if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+				if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 				for(new i = 0; i < MAX_PLAYERS; i++)
 				{
 				    if(IsPlayerConnected(i))
@@ -54949,12 +54949,12 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				SendClientMessage(playerid, COLOR_GRAD2, "USAGE: /moneyall [money]");
 				return 1;
 			}
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				new money;
 				money = strval(tmp);
 				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-				if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+				if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 				for(new i = 0; i < MAX_PLAYERS; i++)
 				{
 				    if(IsPlayerConnected(i))
@@ -54996,12 +54996,12 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				SendClientMessage(playerid, COLOR_GRAD2, "USAGE: /bankmoneyall [money]");
 				return 1;
 			}
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				new money;
 				money = strval(tmp);
 				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-				if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+				if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 				for(new i = 0; i < MAX_PLAYERS; i++)
 				{
 				    if(IsPlayerConnected(i))
@@ -55050,7 +55050,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Taxday can't be below 1");
 				if(PlayerInfo[playerid][pAdmin] == 5 && money > 10000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $10000");
     			if(PlayerInfo[playerid][pAdmin] == 6 && money > 50000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $50000");
-                if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+                if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 				for(new i = 0; i < MAX_PLAYERS; i++)
 				{
 				    if(IsPlayerConnected(i))
@@ -55127,7 +55127,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			tmp = strtokx(cmdtext, idx);
 			money = strval(tmp);
 			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-			if (PlayerInfo[playerid][pAdmin] >= 1337)
+			if (PlayerInfo[playerid][pAdmin] >= 6)
 			{
 			    if(IsPlayerConnected(playa))
 			    {
@@ -55180,7 +55180,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			        {
 			            if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 						if(PlayerInfo[playerid][pAdmin] == 6 && money > 5000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $5000000");
-						if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+						if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 						SafeGivePlayerMoney(playa, money);
 						format(string, sizeof(string), "** Received an Special Bonification of $%d !!",money);
 						SendClientMessage(playa,COLOR_LIGHTBLUE,string);
@@ -55228,7 +55228,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			        {
 			            if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 						if(PlayerInfo[playerid][pAdmin] == 6 && money > 5000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $5000000");
-						if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+						if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 						
                         PlayerInfo[playa][pAccount] += money;
 						format(string, sizeof(string), "** Received an Special Interest of $%d !!",money);
@@ -55276,7 +55276,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			        {
 			            if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 						if(PlayerInfo[playerid][pAdmin] == 6 && money > 5000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $5000000");
-						if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+						if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 						
 						SafeGivePlayerMoney(playa, -money);
 						format(string, sizeof(string), "** Received a Tax of $%d",money);
@@ -55324,7 +55324,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			        {
 			            if(money < 1) return SendClientMessage(playerid, COLOR_GREY, "** Payday can't be below 1");
 						if(PlayerInfo[playerid][pAdmin] == 6 && money > 5000000) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $5000000");
-						if(PlayerInfo[playerid][pAdmin] >= 1337 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
+						if(PlayerInfo[playerid][pAdmin] >= 6 && money > 999999999) return SendClientMessage(playerid, COLOR_GREY, "Your Money limit is $999999999");
 						
 						PlayerInfo[playa][pAccount] -= money;
 						format(string, sizeof(string), "** Received a Bank Tax of $%d",money);
@@ -55877,7 +55877,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				return 1;
 			}
 			giveplayerid = ReturnUser(tmp);
-			if (PlayerInfo[playerid][pAdmin] >= 1337)
+			if (PlayerInfo[playerid][pAdmin] >= 6)
 			{
 				if(IsPlayerConnected(giveplayerid))
 				{
@@ -56544,7 +56544,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				return 1;
 			}
 			new countdowns = strval(tmp);
-			if((countdowns > 60 || countdowns < 3) && PlayerInfo[playerid][pAdmin] < 1337) return SendClientMessage(playerid, COLOR_GREY,"* Seconds must not go above 60 or below 3!");
+			if((countdowns > 60 || countdowns < 3) && PlayerInfo[playerid][pAdmin] < 6) return SendClientMessage(playerid, COLOR_GREY,"* Seconds must not go above 60 or below 3!");
 	        if(CountdownRunning == 0)
 	        {
     			CountdownRunning = 1;
@@ -60101,7 +60101,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         if(IsPlayerConnected(playerid))
         {
-            if(PlayerInfo[playerid][pAdmin] < 1337)
+            if(PlayerInfo[playerid][pAdmin] < 6)
             {
                 SendClientMessage(playerid, COLOR_GREY, "You are not authorized to use that command.");
                 return 1;
@@ -61872,9 +61872,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				{
 					SendClientMessage(playerid, COLOR_GREY, "AVAILABLE LEVELS: 1, 2, 3, 4, 5, 6.");
 				}
-				else if(plevel >= 1337)
+				else if(plevel > 6)
 				{
-					SendClientMessage(playerid, COLOR_GREY, "AVAILABLE LEVELS: 1, 2, 3, 4, 5, 6, 1337.");
+					SendClientMessage(playerid, COLOR_GREY, "AVAILABLE LEVELS: 1, 2, 3, 4, 5, 6, 7.");
 				}
 				return 1;
 			}
@@ -78408,7 +78408,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 
 					format(string, sizeof(string), "* %s spins a key and tries to start vehicle engine.", plname);
 					ProxDetector(30.0, playerid, string, COLOR_CHAT1,COLOR_CHAT2,COLOR_CHAT3,COLOR_CHAT4,COLOR_CHAT5);
-					if(PlayerInfo[playerid][pAdmin] < 1337 && PlayerInfo[playerid][pAdminDuty] == 1)
+					if(PlayerInfo[playerid][pAdmin] < 6 && PlayerInfo[playerid][pAdminDuty] == 1)
 					{
 					    SetTimerEx("StartingTheVehicle",1,0,"i",playerid);
 					}
