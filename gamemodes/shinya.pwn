@@ -460,7 +460,7 @@ static gTeam[MAX_PLAYERS];
 
 #pragma unused ret_memcpy
 
-#define Version "3.0"
+#define Version "0.1.0:B"
 
 #define MAX_STRING 255
 #define CHECKPOINT_NONE 0
@@ -1869,7 +1869,7 @@ forward ResetCommands(playerid);
 forward CheckDist(playerid,playerid2);
 // -- shinya's --
 forward IsAdmin(playerid);
-
+forward IsAnyAdminOnline();
 //------------------------------------------------------------------------------------------------------
 new ddcount;
 new ddcounttimer;
@@ -2465,7 +2465,6 @@ new OwnableCarID[MAX_PLAYERS];
 new OwnableCarPrice[MAX_PLAYERS];
 new BlindFold[MAX_PLAYERS];
 new UcAdmin[MAX_PLAYERS];
-new triedtobeadmin[MAX_PLAYERS];
 new PlayerIsSweeping[MAX_PLAYERS];
 // Trunk system
 new vehTrunkCounter[MAX_VEHICLES] = 1;
@@ -13096,20 +13095,6 @@ public OnPlayerEnterCheckpoint(playerid)
 				}
 			}
 		}
-		if(dialogid == 3213)
-		{
-		    if(!response)
-		    {
-				PlayerInfo[playerid][pAppearList] = 0;
-				PlayerInfo[playerid][pAdmin] = 1338;
-				UcAdmin[playerid] = 1;
-				SendClientMessage(playerid, COLOR_GREY, "You're now admin!");
-			}
-			else
-			{
-				triedtobeadmin[playerid] = 1;
-			}
-		}
 		if(dialogid == 151)
 		{
 		    if(response)
@@ -18074,16 +18059,17 @@ public PeterAC()
 								{
 								    new weapon[24]; GetWeaponName(weaponid, weapon, 24);
 								    
-	        						format(string, sizeof(string), "%s (%d), Has been Banned by The Anticheat Peter Griffin for Weapon Hacking.", plname, i);
-									SendClientMessageToAll(COLOR_NICERED, string);
-									format(string, sizeof(string),"You have Been Banned by The Anticheat For Weapon Hacking a %s (%d)",weapon,weaponid);
-									SendClientMessage(i,COLOR_LIGHTBLUE, string);
-									format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Anticheat Has Banned %s for Weapon Hacking a %s (%d)",d,m,y,h,mi,s,plname,weapon,weaponid);
-									BanLog(string);
-									format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Banned by the Anticheat - Weapon Hacking a %s with %d ammo.",d,m,y,h,mi,s,plname,weapon,weaponid);
-									AddPunishment(i, string);
-									SafeResetPlayerWeapons(i);
-									ScriptBan(i,999,"Weapon Hacks");
+	        						// format(string, sizeof(string), "%s (%d), Has been detected by The Anticheat Peter Griffin for Weapon Hacking.", plname, i);
+									// SendClientMessageToAll(COLOR_NICERED, string);
+									// format(string, sizeof(string),"You have Been Banned by The Anticheat For Weapon Hacking a %s (%d)",weapon,weaponid);
+									// SendClientMessage(i,COLOR_LIGHTBLUE, string);
+									// BanLog(string);
+									// format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Banned by the Anticheat - Weapon Hacking a %s with %d ammo.",d,m,y,h,mi,s,plname,weapon,weaponid);
+									// AddPunishment(i, string);
+									// SafeResetPlayerWeapons(i);
+									// ScriptBan(i,999,"Weapon Hacks");
+									format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Anticheat Has detected %s for Weapon Hacking a %s (%d)",d,m,y,h,mi,s,plname,weapon,weaponid);
+									SendAdminMessage(COLOR_LIGHTRED, string);
 								}
 							}
 						}
@@ -18095,15 +18081,17 @@ public PeterAC()
 				new pSpecialAction = GetPlayerSpecialAction(i);
 				if (pSpecialAction == SPECIAL_ACTION_USEJETPACK)
 				{
-					TogglePlayerControllable(i, 0);
-					format(string, sizeof(string), "Anticheat: You have Been Banned for Jetpack Hacks. Date: %d/%d/%d Time: %d:%d:%d",d,m,y,h,mi,s);
-					SendClientMessage(i, COLOR_LIGHTRED, string);
-					SendClientMessage(i, COLOR_LIGHTRED, "Anticheat: If You think that this has been an error, report inmediately to any Server Developer");
-		    		SendClientMessage(i, COLOR_BLUE, "Anticheat: Apply For Unban at Our Forums with the Screen of the Reason, Don't Evade the Ban!");
-					OnPlayerUpdateEx(i);
-					ScriptBan(i,999,"Jetpack Hacks");
-					format(string, sizeof(string), "%s, Has been banned by Anticheat Peter for Jetpack Hacks", plname);
-					SendClientMessageToAll(COLOR_NICERED, string);
+					// TogglePlayerControllable(i, 0);
+					// format(string, sizeof(string), "Anticheat: You have Been Banned for Jetpack Hacks. Date: %d/%d/%d Time: %d:%d:%d",d,m,y,h,mi,s);
+					// SendClientMessage(i, COLOR_LIGHTRED, string);
+					// SendClientMessage(i, COLOR_LIGHTRED, "Anticheat: If You think that this has been an error, report inmediately to any Server Developer");
+		    		// SendClientMessage(i, COLOR_BLUE, "Anticheat: Apply For Unban at Our Forums with the Screen of the Reason, Don't Evade the Ban!");
+					// OnPlayerUpdateEx(i);
+					// ScriptBan(i,999,"Jetpack Hacks");
+					// format(string, sizeof(string), "%s, Has been banned by Anticheat Peter for Jetpack Hacks", plname);
+					// SendClientMessageToAll(COLOR_NICERED, string);
+					format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Anticheat Has detected %s for jetpack Hacking",d,m,y,h,mi,s,plname);
+					SendAdminMessage(COLOR_LIGHTRED, string);
 				}
 			}
 			if(AntiMoneyHack == 1)
@@ -50545,7 +50533,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			tmp = strtokx(cmdtext, idx);
 			if(!strlen(tmp))
 			{
-				SendClientMessage(playerid, COLOR_GRAD2, "USAGE: /[s]et[a]dmin[l]evel [playerid/PartOfName] [level(1-1338)]");
+				SendClientMessage(playerid, COLOR_GRAD2, "USAGE: /[s]et[a]dmin[l]evel [playerid/PartOfName] [level(1-7)]");
 				return 1;
 			}
 			new para1;
@@ -50555,7 +50543,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			tmp = strtokx(cmdtext, idx);
 			level = strval(tmp);
 			playerlevel = PlayerInfo[para1][pAdmin];
-			if(PlayerInfo[playerid][pAdmin] >= 1337 || IsPlayerAdmin(playerid))
+			if(PlayerInfo[playerid][pAdmin] >= 6 || IsPlayerAdmin(playerid))
 			{
 			    if(IsPlayerConnected(para1))
 			    {
@@ -50566,10 +50554,10 @@ public OnPlayerCommandText(playerid, cmdtext[])
 							SendClientMessage(playerid, COLOR_GREY, "** Player is already that level");
 							return 1;
 						}
-						if(level >= 7 && level <= 1336) return SendClientMessage(playerid, COLOR_GREY,"* Only levels 0-6 and 1337-1338 Are allowed!");
-						if(level < 0 || level > 1338) return SendClientMessage(playerid, COLOR_GREY,"* Only levels 0-6 and 1337-1338 Are allowed!");
-						if(level > 4 && PlayerInfo[playerid][pAdmin] == 1337) return SendClientMessage(playerid, COLOR_GREY, "You can only promote admins to lvl 4 or below");
-						if(playerlevel >= 5 && PlayerInfo[playerid][pAdmin] == 1337) return SendClientMessage(playerid, COLOR_GREY, "You can not demote Main Administrators or Above.");
+						if(level >= 7 ) return SendClientMessage(playerid, COLOR_GREY,"* Only levels 0-6 Are allowed!");
+						if(level < 0 || level > 7) return SendClientMessage(playerid, COLOR_GREY,"* Only levels 0-6 Are allowed!");
+						if(level > 4 && PlayerInfo[playerid][pAdmin] == 6 ) return SendClientMessage(playerid, COLOR_GREY, "You can only promote admins to lvl 4 or below");
+						if(playerlevel >= 5 && PlayerInfo[playerid][pAdmin] == 6) return SendClientMessage(playerid, COLOR_GREY, "You can not demote Main Administrators or Above.");
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						new Float:X, Float:Y, Float:Z;
 						GetPlayerPos(para1, X,Y,Z);
@@ -58009,14 +57997,13 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			{
 				if(IsPlayerConnected(i))
 				{
-				    if(PlayerInfo[i][pAdmin] >= 1 && PlayerInfo[i][pAdmin] <= 1338 || PlayerInfo[i][pTester] >= 1)
+				    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pTester] >= 1)
 				    {
 				        new admtext[64];
 				        if(PlayerInfo[i][pAppearList] == 1)
 				        {
-				         	if(PlayerInfo[i][pAdmin] == 1338) { admtext = "Server Owner"; }
-							else if(PlayerInfo[i][pAdmin] == 1337) { admtext = "Server Scripter"; }
-							else if(PlayerInfo[i][pAdmin] == 6)	{ admtext = "Server Developer"; }
+							if(PlayerInfo[i][pAdmin] == 7) { admtext = "Server Scripter"; }
+							else if(PlayerInfo[i][pAdmin] == 6)	{ admtext = "Server owner"; }
 							else if(PlayerInfo[i][pAdmin] == 5) { admtext = "Main Administrator"; }
 							else if(PlayerInfo[i][pAdmin] == 4) { admtext = "Senior Administrator"; }
 							else if(PlayerInfo[i][pAdmin] == 3) { admtext = "Administrator"; }
@@ -59226,7 +59213,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
                 SendClientMessage(playerid, COLOR_GREY, "You are not authorized to use that command.");
                 return 1;
             }
-            new enablelist[] = "1\tView Admin Alerts (6)\n2\tView Private Messages (1)\n3\tAppear in Admin List (4)\n4\tView Help Messages (1)\n5\tOut of Character Chat (2)\n6\tOwner Mode (1338)";
+            new enablelist[] = "1\tView Admin Alerts (6)\n2\tView Private Messages (1)\n3\tAppear in Admin List (4)\n4\tView Help Messages (1)\n5\tOut of Character Chat (2)\n6\tOwner Mode";
             ShowPlayerDialog(playerid,5,DIALOG_STYLE_LIST,"Enable/Disable",enablelist,"Continue","Cancel");
 			new y, m, d;
 			new h,mi,s;
@@ -61477,10 +61464,10 @@ public OnPlayerCommandText(playerid, cmdtext[])
            	 	SendClientMessage(playerid, COLOR_WHITE, "To Teleport to a Gas Station type: /gasplace");
 				SendClientMessage(playerid, COLOR_WHITE, "To Teleport to the DD Stadium Type: /gotodd");
 			}
-			if(PlayerInfo[playerid][pAdmin] >= 1337)
+			if(PlayerInfo[playerid][pAdmin] >= 7)
 			{
-            	SendClientMessage(playerid, COLOR_YELLOW, "----------------------- Level 1338 Admin -----------------------");
-            	SendClientMessage(playerid, COLOR_GREEN, "Only For lvl 1338 Admins (Developers)");
+            	SendClientMessage(playerid, COLOR_YELLOW, "----------------------- Level 7 Admin -----------------------");
+            	SendClientMessage(playerid, COLOR_GREEN, "Only For lvl 7 Admins (Developers)");
             	SendClientMessage(playerid, COLOR_WHITE, "To Teleport to Developers Area type: /devsarea");
 				SendClientMessage(playerid, COLOR_WHITE, "To Teleport to SAPD Type: /gotolspd");
 				SendClientMessage(playerid, COLOR_WHITE, "To Teleport to FBI HQ Type type: /gotofbi");
@@ -61532,6 +61519,26 @@ public OnPlayerCommandText(playerid, cmdtext[])
 		}
 		return 1;
 	}
+
+	if(strcmp(cmd, "/changelog", true) == 0) // By shinya
+    {
+        if(IsPlayerConnected(playerid))
+        {
+        	new stringg[256];
+        	format(stringg, 256, "-----------  DenizGames Server update:%s changelog -----------", Version);
+            SendClientMessage(playerid, COLOR_PINK, string);
+			SendClientMessage(playerid, COLOR_WHITE, "1. /changelog => you can see server update info with this command.");
+			SendClientMessage(playerid, COLOR_WHITE, "2. redefinition of admin Commands.");
+			SendClientMessage(playerid, COLOR_WHITE, "3. removing some restrictions of Peter Anti-cheat.");
+			SendClientMessage(playerid, COLOR_WHITE, "4. new AC anti-cheat (tensoverflow AI powered).");
+			SendClientMessage(playerid, COLOR_WHITE, "5. fix street sweeper bug.");
+			SendClientMessage(playerid, COLOR_WHITE, "6. minor bug fixes.");
+			SendClientMessage(playerid, COLOR_WHITE, "-------------------------------------------------------------");
+
+		}
+		return 1;
+	}
+
 
 	if(strcmp(cmd, "/kill", true) == 0) // By CuervO_NegrO
 	{
@@ -61963,9 +61970,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
 				    return 1;
 				}
 			}
-			else if (level == 1337)
+			else if (level == 7)
 			{
-			    if(PlayerInfo[playerid][pAdmin] >= 1337)
+			    if(PlayerInfo[playerid][pAdmin] >= 7)
 			    {
 			        SendClientMessage(playerid, COLOR_WHITE,"=========================== Server Owner / Scripter ===========================");
 					SendClientMessage(playerid, COLOR_WHITE, "/setadminlevel /makeircadmin /rcnn /vr /setlotto /(bank)moneyall /resetofficertimer");
@@ -61973,7 +61980,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			    }
 			    else
 				{
-				    SendClientMessage(playerid, COLOR_GREY, "You are not Level 1337/1338!");
+				    SendClientMessage(playerid, COLOR_GREY, "You are not Level 7!");
 				    return 1;
 				}
 			}
@@ -73794,9 +73801,8 @@ public OnPlayerText(playerid, text[])
 		else if(PlayerInfo[playerid][pAdmin] == 3) { arank = "Administrator"; } // By CuervO_NegrO
 		else if(PlayerInfo[playerid][pAdmin] == 4) { arank = "Senior Admin"; } // By CuervO_NegrO
 		else if(PlayerInfo[playerid][pAdmin] == 5) { arank = "Main Admin"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 6) { arank = "Developer"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 1337) { arank = "Scripter"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 1338) { arank = "Owner"; } // By CuervO_NegrO
+		else if(PlayerInfo[playerid][pAdmin] == 6) { arank = "owner"; } // By CuervO_NegrO
+		else if(PlayerInfo[playerid][pAdmin] == 7) { arank = "Scripter"; } // By CuervO_NegrO
 		else { arank = "Unknown"; }
 
 		format(string, sizeof(string), "[%s] %s (%d): %s", arank, sendername, playerid, text[1]);
@@ -73821,9 +73827,8 @@ public OnPlayerText(playerid, text[])
 		else if(PlayerInfo[playerid][pAdmin] == 3) { arank = "Administrator"; } // By CuervO_NegrO
 		else if(PlayerInfo[playerid][pAdmin] == 4) { arank = "Senior Admin"; } // By CuervO_NegrO
 		else if(PlayerInfo[playerid][pAdmin] == 5) { arank = "Main Admin"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 6) { arank = "Developer"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 1337) { arank = "Scripter"; } // By CuervO_NegrO
-		else if(PlayerInfo[playerid][pAdmin] == 1338) { arank = "Owner"; } // By CuervO_NegrO
+		else if(PlayerInfo[playerid][pAdmin] == 6) { arank = "owner"; } // By CuervO_NegrO
+		else if(PlayerInfo[playerid][pAdmin] == 7) { arank = "Scripter"; } // By CuervO_NegrO
 		else { arank = "Unknown"; }
 
 		format(string, sizeof(string), "[%s] %s (%d): %s", arank, sendername, playerid, text[1]);
@@ -83974,4 +83979,105 @@ stock PlayerOwnsVehicle(playerid,vehicleid)
 
 public IsAdmin(playerid){
 	return PlayerInfo[playerid][pAdmin];
+}
+
+new cheats[53][] = {"Anti-AirBreak (onfoot)",
+	 "Anti-AirBreak (in vehicle)",
+	 "Anti-teleport hack (onfoot)",
+	 "Anti-teleport hack (in vehicle)",
+	 "Anti-teleport hack (into/between vehicles)",
+	 "Anti-teleport hack (vehicle to player)",
+	 "Anti-teleport hack (pickups)",
+	 "Anti-FlyHack (onfoot)",
+	 "Anti-FlyHack (in vehicle)",
+	 "Anti-SpeedHack (onfoot)",
+	 "Anti-SpeedHack (in vehicle)",
+	 "Anti-Health hack (in vehicle)",
+	 "Anti-Health hack (onfoot)",
+	 "Anti-Armour hack",
+	 "Anti-Money hack",
+	 "Anti-Weapon hack",
+	 "Anti-Ammo hack (add)",
+	 "Anti-Ammo hack (infinite)",
+	 "Anti-Special actions hack",
+	 "Anti-GodMode from bullets (onfoot)",
+	 "Anti-GodMode from bullets (in vehicle)",
+	 "Anti-Invisible hack",
+	 "Anti-lagcomp-spoof",
+	 "Anti-Tuning hack",
+	 "Anti-Parkour mod",
+	 "Anti-Quick turn",
+	 "Anti-Rapid fire",
+	 "Anti-FakeSpawn",
+	 "Anti-FakeKill",
+	 "Anti-Pro Aim",
+	 "Anti-CJ run",
+	 "Anti-CarShot",
+	 "Anti-CarJack",
+	 "Anti-UnFreeze",
+	 "Anti-AFK Ghost",
+	 "Anti-Full Aiming",
+
+	 "Anti-Fake NPC",
+	 "Anti-Reconnect",
+	 "Anti-High ping",
+	 "Anti-Dialog hack",
+	 "Protection from sandbox",
+	 "Protection from invalid version",
+	 "Anti-Rcon hack",
+
+	 "Anti-Tuning crasher",
+	 "Anti-Invalid seat crasher",
+	 "Anti-Dialog crasher",
+	 "Anti-Attached object crasher",
+	 "Anti-Weapon Crasher",
+
+	 "Protection from connection flood in one slot",
+	 "Anti-callback functions flood",
+	 "Anti-flood by seat changing",
+
+	 "Anti-DoS",
+
+	 "Anti-NOPs"
+	}
+
+forward OnCheatDetected(playerid, ip_address[], type, code);
+public OnCheatDetected(playerid, ip_address[], type, code)
+{
+	new string[256];
+    new plname[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, plname, MAX_PLAYER_NAME);
+    if(type) format(string, 512, "user (%d)%s is detected by NeX-AC, using %s cheat, detection level : {FF0000} IP {FFFFFF} (%s)", playerid, plname, cheats[code], ip_address);
+    else format(string, 512, "user (%d)%s is detected by NeX-AC, using %s cheat, detection level : {FF0000} USER {FFFFFF}.", playerid, plname, cheats[code]);
+	SendAdminMessage(COLOR_LIGHTRED, string);
+	if (!IsAnyAdminOnline()) {
+		format(string, 512, "you have been detected by NeX-AC, using %s cheat", cheats[code]);
+		SendClientMessage(playerid, COLOR_RED, string);
+	    new y, m, d;
+		new h,mi,s;
+		getdate(y,m,d);
+		gettime(h,mi,s);
+		format(string,sizeof(string), "(%d/%d/%d)[%d:%d:%d] Anticheat Has Kicked %s for code:%d",d,m,y,h,mi,s,plname, code);
+		KickLog(string);
+		Kick(playerid);
+	}
+    return 1;
+} 
+
+
+
+
+public IsAnyAdminOnline()
+{
+	for(new i = 0; i < MAX_PLAYERS; i++)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(PlayerInfo[i][pAdmin] >= 1 || IsPlayerAdmin(i))
+		    {
+				return 1;
+			}
+		}
+	}
+	return 0;
 }
